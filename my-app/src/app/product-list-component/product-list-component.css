@@ -1,0 +1,8 @@
+.negative-price {
+    background: #ffd6d6;
+    color: #b00020;
+}
+
+img {
+    object-fit: cover;
+}

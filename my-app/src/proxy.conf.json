@@ -1,0 +1,8 @@
+{
+  "/products": { "target": "https://fakestoreapi.com", "secure": true, "changeOrigin": true },
+  "/products/**": { "target": "https://fakestoreapi.com", "secure": true, "changeOrigin": true },
+  "/books": { "target": "http://localhost:3000", "secure": false, "changeOrigin": true },
+  "/books/**": { "target": "http://localhost:3000", "secure": false, "changeOrigin": true },
+  "/fashions": { "target": "http://localhost:3002", "secure": false, "changeOrigin": true },
+  "/fashions/**": { "target": "http://localhost:3002", "secure": false, "changeOrigin": true }
+}

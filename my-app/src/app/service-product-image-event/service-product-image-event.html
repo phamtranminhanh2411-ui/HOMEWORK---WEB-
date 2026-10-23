@@ -1,0 +1,21 @@
+<h2>Product list</h2>
+<table border="1">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Price</th>
+			<th>Picture</th>
+			<th>Details</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let product of products">
+			<td>{{ product.id }}</td>
+			<td>{{ product.name }}</td>
+			<td>{{ product.price }}</td>
+			<td><img [src]="product.image" [alt]="product.name" width="100" height="100"></td>
+			<td><button type="button" (click)="viewDetail(product)">Details</button></td>
+		</tr>
+	</tbody>
+</table>

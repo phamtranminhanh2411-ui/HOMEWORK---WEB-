@@ -1,0 +1,26 @@
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+
+
+
+export const authGuard: CanActivateFn = (route, state) => {
+  const router = inject(Router);
+
+
+
+  // Giả lập kiểm tra đăng nhập từ localStorage
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+
+
+  if (isLoggedIn) {
+    return true; // Cho phép vào
+  } else {
+    alert('Bạn chưa đăng nhập!');
+    return router.parseUrl('/contact');
+  }
+};
+
+
+
+

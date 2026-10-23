@@ -1,0 +1,24 @@
+<h2>Product detail</h2>
+<button type="button" (click)="goBack()">Go Back</button>
+
+<table border="1" *ngIf="selectedProduct as product">
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td>{{ product.id }}</td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>{{ product.name }}</td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td>{{ product.price }}</td>
+        </tr>
+        <tr>
+            <td colspan="2"><img [src]="product.image" [alt]="product.name" width="200"></td>
+        </tr>
+    </tbody>
+</table>
+
+<p *ngIf="!selectedProduct">Product not found.</p>

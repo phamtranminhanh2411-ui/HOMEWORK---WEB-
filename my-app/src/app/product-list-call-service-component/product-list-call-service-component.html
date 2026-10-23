@@ -1,0 +1,13 @@
+<p>product-list-call-service-component works!</p>
+<div>
+    Min price: <input type="number" [(ngModel)]="minPrice" />
+    Max price: <input type="number" [(ngModel)]="maxPrice" />
+    <button (click)="filterProducts()">Filter</button>
+</div>
+<ol>
+    <li *ngFor="let product of products">
+        {{ product.name }} - ${{ product.price }}
+        <br/>
+        <img [src]="product.image" [alt]="product.name" width="100">
+    </li>
+</ol>

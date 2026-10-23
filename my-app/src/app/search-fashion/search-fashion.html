@@ -1,0 +1,72 @@
+<main class="fashion-search">
+  <header><span class="eyebrow">FASHION EXPLORER</span><h1>SearchFashion</h1>
+    <p>Tìm thiết kế theo nội dung. Khám phá kết quả gần với từ khóa nhất.</p>
+  </header>
+  <form class="search-panel" (ngSubmit)="search()">
+    <div class="search-controls">
+      <div><label for="fashion-query">Từ khóa tìm kiếm</label>
+        <input id="fashion-query" name="query" class="form-control" type="search" [(ngModel)]="query"
+          placeholder="Ví dụ: đầm dạ hội thanh lịch" maxlength="1000" required [disabled]="loading()" aria-describedby="search-help">
+      </div>
+      <div><label for="fashion-field">Tìm theo</label>
+        <select id="fashion-field" name="field" class="form-select" [(ngModel)]="field" [disabled]="loading()">
+          <option value="fashion_subject">fashion_subject</option><option value="fashion_detail">fashion_detail</option>
+        </select>
+      </div>
+      <div><label for="fashion-limit">Số kết quả</label>
+        <input id="fashion-limit" name="limit" class="form-control" type="number" [(ngModel)]="limit"
+          min="1" max="100" step="1" required [disabled]="loading()">
+      </div>
+      <button type="submit" [disabled]="loading()">{{ loading() ? 'Đang tìm…' : 'Tìm kiếm →' }}</button>
+    </div>
+    <p id="search-help" class="help">Jaccard = số từ chung / tổng số từ khác nhau. Không phân biệt hoa thường, bỏ qua dấu câu và thẻ HTML.</p>
+  </form>
+  @if (error()) { <div class="alert alert-danger" role="alert">{{ error() }}</div> }
+  <section class="results-panel" [attr.aria-busy]="loading()" aria-labelledby="results-heading">
+    <div class="results-heading">
+      <div><h2 id="results-heading">Kết quả tìm kiếm</h2><p aria-live="polite">
+        @if (loading()) { Đang so sánh dữ liệu Fashion… }
+        @else if (searched()) { Hiển thị {{ results().length }} / {{ total() }} Fashion · Điểm giảm dần }
+        @else { Kết quả được sắp xếp theo Jaccard Similarity }
+      </p></div>
+      <div class="legend" aria-label="Chú thích màu điểm Jaccard">
+        <span><i class="swatch high"></i>0,75 – 1</span>
+        <span><i class="swatch medium"></i>0,5 – &lt;0,75</span>
+        <span><i class="swatch low"></i>&lt;0,5</span>
+      </div>
+    </div>
+    <div class="table-scroll"><table>
+      <thead><tr><th scope="col">Id</th><th scope="col">Style</th><th scope="col">fashion_subject</th>
+        <th scope="col">fashion_detail</th><th scope="col">Image</th><th scope="col" aria-sort="descending">Jaccard Similarity ↓</th>
+      </tr></thead>
+      <tbody>
+        @for (fashion of results(); track fashion._id) {
+          <tr [class.high]="fashion.jaccardSimilarity >= 0.75"
+            [class.medium]="fashion.jaccardSimilarity >= 0.5 && fashion.jaccardSimilarity < 0.75"
+            [class.low]="fashion.jaccardSimilarity < 0.5">
+            <td class="fashion-id">{{ fashion._id }}</td>
+            <td><span class="style-badge">{{ fashion.style || '—' }}</span></td>
+            <td class="subject">{{ fashion.fashion_subject }}</td>
+            <td class="detail"><div [innerHTML]="fashion.fashion_detail"></div></td>
+            <td><div class="image-frame"><span class="image-placeholder">Không có ảnh</span>
+              @if (fashion.fashion_image) {
+                <img [src]="imageSource(fashion.fashion_image)" [alt]="fashion.fashion_subject || 'Fashion'"
+                  loading="lazy" (error)="hideBrokenImage($event)">
+              }
+            </div></td>
+            <td class="score-cell"><strong [title]="'' + fashion.jaccardSimilarity">{{ fashion.jaccardSimilarity | number:'1.4-4' }}</strong>
+              <div class="score-track" aria-hidden="true"><span [style.width.%]="fashion.jaccardSimilarity * 100"></span></div>
+            </td>
+          </tr>
+        } @empty {
+          <tr><td colspan="6" class="empty-state">
+            @if (loading()) { Đang tìm kiếm Fashion… }
+            @else if (searched()) { Chưa có Fashion trong cơ sở dữ liệu. }
+            @else { Nhập từ khóa và nhấn “Tìm kiếm” để bắt đầu. }
+          </td></tr>
+        }
+      </tbody>
+    </table></div>
+    <p class="results-note">Điểm nằm trong khoảng 0–1. Điểm càng cao, nội dung càng tương đồng; Fashion có điểm 0 được xếp cuối.</p>
+  </section>
+</main>

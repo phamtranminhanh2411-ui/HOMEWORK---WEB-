@@ -1,0 +1,12 @@
+input {
+    width: 205px;
+}
+
+img {
+    margin-top: 12px;
+    object-fit: contain;
+}
+
+li {
+    margin-top: 18px;
+}

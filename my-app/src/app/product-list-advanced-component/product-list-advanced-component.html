@@ -1,0 +1,40 @@
+<p>product-list-advanced-component works!</p>
+{{errMessage()}}
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Details</th>
+      <th>Slug</th>
+  </thead>
+  <tbody>
+    @for (p of products(); track p.id) {
+    <tr>
+      <td>{{ p.id }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ p.price }}</td>
+      <td>
+        <a (click)="viewDetail(p.id)"
+        style="cursor: pointer;"
+        title="click here to view detail">
+      	View detail</a>
+      </td>
+        <td>
+          <span
+            (click)="viewDetailSlug(p)"
+            style="cursor: pointer;"
+            title="Click to view product detail">
+            /products/{{ generateSlug(p.name, p.id) }}
+          </span>
+        </td>
+    </tr>
+  } @empty {
+    <tr>
+      <td colspan="5">No products available.</td>
+    </tr>
+  }
+  </tbody>
+</table>
+<router-outlet></router-outlet>

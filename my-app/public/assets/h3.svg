@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 180">
+  <rect width="120" height="180" fill="white"/>
+  <path d="M43 22h34l5 18v112c0 8-5 14-14 14H52c-9 0-14-6-14-14V40z" fill="#d71920" stroke="#333" stroke-width="3"/>
+  <path d="M43 22h34v18H43z" fill="#eee" stroke="#333" stroke-width="3"/>
+  <text x="60" y="92" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#ffd400">STING</text>
+  <path d="M48 112h24" stroke="#ffd400" stroke-width="4"/>
+</svg>
