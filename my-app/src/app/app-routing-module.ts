@@ -23,6 +23,8 @@ import { FashionComponent } from './fashion-component/fashion-component';
 import { FashionDetailComponent } from './fashion-detail-component/fashion-detail-component';
 import { SearchFashion } from './search-fashion/search-fashion';
 import { FashionNewComponent } from './fashion-new-component/fashion-new-component';
+import { FashionSlugList } from './fashion-slug-list/fashion-slug-list';
+import { FashionSlugDetail } from './fashion-slug-detail/fashion-slug-detail';
 
 const routes: Routes = [
   {path:"", redirectTo:"products/1", pathMatch:"full"},
@@ -62,6 +64,8 @@ const routes: Routes = [
   {path: "fashion-detail", component: FashionDetailComponent},
   {path: "search-fashion", component: SearchFashion},
   {path: "fashion-new", component: FashionNewComponent},
+  {path: 'fashion-slug-list', component: FashionSlugList},
+  {path: 'fashion-slug/:slug', component: FashionSlugDetail},
   {path:"**",component:PageNotFoundComponent}
 ];
 @NgModule({
