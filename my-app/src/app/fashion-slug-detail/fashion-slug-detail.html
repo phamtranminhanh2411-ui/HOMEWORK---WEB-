@@ -1,0 +1,20 @@
+<section>
+  <h2>Fashion Detail</h2>
+  <p><a routerLink="/fashion-slug-list">Quay lại danh sách Fashion</a></p>
+  @if (loading()) { <p role="status">Đang tải Fashion...</p> }
+  @if (error()) { <p class="error" role="alert">{{ error() }}</p> }
+  @if (fashion(); as item) {
+    <table>
+      <tbody>
+        <tr><th scope="row">IdF</th><td>{{ item.IdF }}</td></tr>
+        <tr><th scope="row">Style</th><td>{{ item.style }}</td></tr>
+        <tr><th scope="row">Fashion Subject</th><td>{{ item.fashion_subject }}</td></tr>
+        <tr><th scope="row">Fashion Detail</th><td><div [innerHTML]="item.fashion_detail"></div></td></tr>
+        <tr><th scope="row">Slug</th><td>{{ item.slug }}</td></tr>
+        <tr><th scope="row">Image</th><td>@if (item.fashion_image) {
+          <img [src]="item.getBase64String()" [alt]="item.fashion_subject">
+        }</td></tr>
+      </tbody>
+    </table>
+  }
+</section>

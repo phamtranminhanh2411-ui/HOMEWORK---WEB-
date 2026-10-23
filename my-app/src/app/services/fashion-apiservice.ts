@@ -37,8 +37,10 @@ export class FashionAPIService {
       let jsonString=JSON.stringify(aFashion)
       return this._http.post<any>("/fashions",jsonString,this.requestOptions).pipe(
           map(res=>JSON.parse(res) as Fashion),
-          retry(3),
           catchError(this.handleError))
+    }
+    getFashionBySlug(slug:string):Observable<Fashion> {
+      return this._http.get<Fashion>('/fashions/slug/' + encodeURIComponent(slug));
     }
 }
 

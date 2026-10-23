@@ -1,0 +1,13 @@
+:host { display: block; }
+section { margin: 24px auto; padding: 0 16px; max-width: 1200px; }
+h2 { margin-bottom: 16px; font-size: 24px; }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px; border: 1px solid #d6dce2; text-align: left; vertical-align: middle; }
+th { background: #f1f4f7; white-space: nowrap; }
+tbody tr:hover { background: #fafbfc; }
+img { width: 100px; height: 100px; object-fit: contain; }
+.description { max-width: 360px; max-height: 140px; overflow: auto; overflow-wrap: anywhere; }
+a { color: #175ea8; overflow-wrap: anywhere; }
+a:hover { color: #104478; }
+.error { color: #b42318; }
